@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>هدية ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf3ee;--card:#fffaf6;--rose:#e9a9b8;--red:#b8323f;--brown:#a07a66;--ink:#5a3b34}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Tajawal',sans-serif;min-height:100vh;overflow-x:hidden}
+.hidden{display:none!important}
+.screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px 110px;text-align:center}
+
+/* ===== شاشة المظروف ===== */
+.envelope{position:relative;width:min(320px,86vw);height:210px;background:#cdb497;border-radius:6px;box-shadow:0 14px 30px rgba(90,59,52,.25);margin-bottom:34px}
+.envelope::before{content:"";position:absolute;inset:0;background:#d9c3a8;clip-path:polygon(0 0,100% 0,50% 62%)}
+.envelope::after{content:"";position:absolute;inset:0;background:#c3a78a;clip-path:polygon(0 100%,50% 45%,100% 100%)}
+.label{position:absolute;z-index:2;top:22px;left:50%;transform:translateX(-50%);background:#fffdf9;padding:8px 20px;box-shadow:0 2px 8px rgba(0,0,0,.15);white-space:nowrap;font-family:'Aref Ruqaa',serif;font-size:22px}
+.seal{position:absolute;z-index:3;top:88px;left:50%;transform:translateX(-50%);width:62px;height:62px;border-radius:50%;border:5px solid #8f2d2d;background:#8f2d2d center/cover;box-shadow:0 3px 8px rgba(0,0,0,.35)}
+.hint{font-size:13px;color:var(--brown);margin-bottom:10px}
+input{width:min(260px,80vw);padding:12px;border-radius:30px;border:1px solid #e6d3c8;background:#fff;text-align:center;font:inherit;color:var(--ink);outline:none}
+input:focus{border-color:var(--rose)}
+.btn{margin-top:14px;padding:12px 30px;border:0;border-radius:30px;background:var(--red);color:#fff;font:700 15px 'Tajawal',sans-serif;cursor:pointer;box-shadow:0 5px 14px rgba(184,50,63,.35)}
+.btn.soft{background:#f3d3da;color:var(--red);box-shadow:none}
+.err{color:var(--red);font-size:13px;height:18px;margin-top:8px}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+
+/* ===== الرسالة ===== */
+.paper{width:min(360px,90vw);min-height:300px;background:var(--card);border-radius:14px;padding:28px 22px;box-shadow:0 10px 28px rgba(90,59,52,.15)}
+.paper .emoji{font-size:40px;margin-bottom:18px}
+#typed{font-family:'Aref Ruqaa',serif;font-size:21px;line-height:2.1;text-align:right;white-space:pre-line}
+#typed::after{content:"|";color:var(--rose);animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ===== الصفحة الطويلة ===== */
+.hero{height:100vh;background:#d9c3a8 center/cover;display:flex;align-items:center;justify-content:center;position:relative}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:35%;background:linear-gradient(transparent,var(--bg))}
+.glass{z-index:2;padding:12px 34px;border-radius:30px;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.28);backdrop-filter:blur(8px);color:#fff;font:700 18px 'Tajawal',sans-serif;cursor:pointer}
+.wrap{max-width:420px;margin:0 auto;padding:10px 18px 140px;text-align:center}
+.box{background:var(--card);border-radius:20px;padding:20px;margin:18px 0;box-shadow:0 6px 20px rgba(90,59,52,.1)}
+.title{font-family:'Aref Ruqaa',serif;font-size:26px;color:var(--red)}
+.counter{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.counter div{background:#f7dfe3;border-radius:12px;padding:10px 2px}
+.counter b{display:block;font-size:24px;color:var(--red)}
+.counter span{font-size:12px;color:var(--brown)}
+.chip{display:inline-block;background:#f3d3da;color:var(--red);padding:8px 18px;border-radius:20px;font-weight:700}
+figure{margin:22px 0;background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 6px 20px rgba(90,59,52,.12)}
+figure img{display:block;width:100%;min-height:200px;background:#ead6cb}
+figcaption{padding:12px;font-size:16px}
+.card{display:none;margin-top:16px;font-family:'Aref Ruqaa',serif;font-size:24px;text-align:right;min-height:120px}
+.card.on{display:block}
+
+/* ===== مشغل الأغاني + القلوب ===== */
+.player{position:fixed;z-index:20;bottom:14px;left:50%;transform:translateX(-50%);width:min(380px,94vw);background:rgba(255,250,246,.92);backdrop-filter:blur(10px);border-radius:40px;padding:10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 22px rgba(90,59,52,.25)}
+.player button{border:0;background:#f3d3da;color:var(--red);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:14px}
+.player .info{flex:1;font-size:13px;min-width:0}
+.bar{height:4px;background:#ead6cb;border-radius:4px;margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--red)}
+.heart{position:fixed;top:-30px;z-index:5;color:var(--brown);opacity:.55;pointer-events:none;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(112vh) rotate(40deg)}}
+@media (prefers-reduced-motion:reduce){.heart{display:none}}
+</style>
+</head>
+<body>
+
+<!-- 1) شاشة المظروف والباسورد -->
+<section id="lock" class="screen">
+  <div class="envelope">
+    <div class="label" id="envTitle"></div>
+    <div class="seal" id="seal"></div>
+  </div>
+  <div class="hint">🔒 اكتب الكلمة السرية</div>
+  <input id="pw" type="text" placeholder="• password •" autocomplete="off">
+  <div class="err" id="err"></div>
+  <button class="btn" id="unlock">Unlock 💗</button>
+</section>
+
+<!-- 2) الرسالة (بتتكتب حرف حرف) -->
+<section id="letter" class="screen hidden">
+  <div class="paper">
+    <div class="emoji">😍</div>
+    <div id="typed"></div>
+  </div>
+  <button class="btn soft hidden" id="next">next ←</button>
+</section>
+
+<!-- 3) الصفحة الطويلة: صورة، عداد، صور، ختام -->
+<main id="story" class="hidden">
+  <div class="hero" id="hero"><button class="glass" id="heroBtn"></button></div>
+  <div class="wrap">
+    <div class="box">
+      <div class="title" id="counterTitle"></div>
+      <div class="counter">
+        <div><b id="d">0</b><span>يوم</span></div>
+        <div><b id="h">0</b><span>ساعة</span></div>
+        <div><b id="m">0</b><span>دقيقة</span></div>
+        <div><b id="s">0</b><span>ثانية</span></div>
+      </div>
+      <div id="counterNote"></div>
+    </div>
+    <div class="box"><div id="confLabel"></div><br><span class="chip" id="confDate"></span></div>
+    <div id="gallery"></div>
+    <button class="btn" id="msgBtn">❤️ message ❤️</button>
+    <div class="box card" id="msgCard"></div>
+    <button class="btn soft" id="again">🔄 memories</button>
+  </div>
+</main>
+
+<!-- مشغل الأغاني -->
+<div class="player hidden" id="player">
+  <button id="prev">⏮</button><button id="play">⏸</button><button id="nextSong">⏭</button>
+  <div class="info"><div id="songName"></div><div class="bar"><i id="prog"></i></div></div>
+</div>
+<audio id="audio"></audio>
+
+<script>
+/* ==========================================================
+   ✏️✏️✏️  كل اللي محتاج تغيره موجود هنا في CONFIG بس  ✏️✏️✏️
+   ========================================================== */
+const CONFIG = {
+  // الكلمة السرية اللي بتفتح الهدية
+  password: "love",
+
+  // الكلام اللي على المظروف
+  envelopeTitle: "my Ojety ❤️",
+
+  // الصورة اللي جوه الختم الأحمر (حط صورتك في فولدر اسمه photos)
+  sealPhoto: "916559247_1807387727008105_6124374509043411213_n.jpg",
+
+  // الرسالة اللي بتتكتب حرف حرف (تقدر تنزل سطر جديد بـ \n)
+  letter: "انتي عارفه ان قد اي بحبك ومليش غيرك اصلا وانتي بنوتي صغيره وهفضل في ضهرك طول العمر ومش هستغني عنك يقلبي",
+
+  // الصورة الكبيرة اللي في أول الصفحة + الكلمة اللي على الزرار
+  heroPhoto: "917000458_1794036138335472_1044878335753160659_n.jpg",
+  heroButton: "بحبك 💗",
+
+  // العداد: تاريخ البداية بالشكل ده  سنة-شهر-يوم
+  startDate: "2011-09-23",
+  counterTitle: "💗 يوم ولادتك 23.9.211 💗",
+  counterNote: "كل ثانية بتعدي وانت في قلبي ❤️",
+
+  // "يوم ما قولتلك بحبك"
+  confessionLabel: " اخر يوم ليكي في اعدادي❤️",
+  confessionDate: "2026-04-23",
+
+  // الأغاني (حط ملفات الأغاني في فولدر music)
+  songs: [
+    { title: "يوم ولادتك 😍", file: "ahmedmekky.mp3" },
+    { title: "يوم ولادتك",       file: "ahmedmekky.mp3" }
+  ],
+
+  // الصور اللي في الصفحة: image = مسار الصورة ، caption = الكلام اللي تحتها
+  gallery: [
+    { image: "918233258_2844552629278697_5592962848491044836_n.jpg", caption: "بحبك" },
+    { image: "918543183_1074981548886947_519976025304853802_n.jpg", caption: "يوم ميتنسيش 😂❤️" },
+    { image: "920950484_1614295469886176_4232564579830761305_n.jpg", caption: "بحبك" },
+    { image: "923585162_1836662887575774_3866958686286835191_n.jpg", caption: "❤️" }
+  ],
+
+  // الرسالة اللي بتفتح لما يدوس على زرار message
+  finalMessage: "بحبك اوي"
+};
+/* ================= آخر الجزء اللي بتعدله ================= */
+
+const $ = s => document.querySelector(s);
+const audio = $('#audio');
+let song = 0;
+
+// تعبئة الكلام والصور من CONFIG
+$('#envTitle').textContent = CONFIG.envelopeTitle;
+$('#seal').style.backgroundImage = `url('${CONFIG.sealPhoto}')`;
+$('#hero').style.backgroundImage = `url('${CONFIG.heroPhoto}')`;
+$('#heroBtn').textContent = CONFIG.heroButton;
+$('#counterTitle').textContent = CONFIG.counterTitle;
+$('#counterNote').textContent = CONFIG.counterNote;
+$('#confLabel').textContent = CONFIG.confessionLabel;
+$('#confDate').textContent = '📅 ' + CONFIG.confessionDate;
+$('#msgCard').textContent = CONFIG.finalMessage;
+$('#gallery').innerHTML = CONFIG.gallery.map(g =>
+  `<figure><img src="${g.image}" alt="" loading="lazy" onerror="this.style.minHeight='220px'"><figcaption>${g.caption}</figcaption></figure>`).join('');
+
+// فتح القفل
+function tryUnlock(){
+  if ($('#pw').value.trim().toLowerCase() === CONFIG.password.toLowerCase()){
+    $('#lock').classList.add('hidden');
+    $('#letter').classList.remove('hidden');
+    $('#player').classList.remove('hidden');
+    loadSong(0); audio.play().catch(()=>{});
+    typeLetter();
+  } else {
+    $('#err').textContent = 'الكلمة غلط، جرب تاني 🙈';
+    $('#pw').classList.remove('shake'); void $('#pw').offsetWidth; $('#pw').classList.add('shake');
+  }
+}
+$('#unlock').onclick = tryUnlock;
+$('#pw').onkeydown = e => { if (e.key === 'Enter') tryUnlock(); };
+
+// كتابة الرسالة حرف حرف
+function typeLetter(){
+  let i = 0; const el = $('#typed');
+  const t = setInterval(() => {
+    el.textContent = CONFIG.letter.slice(0, ++i);
+    if (i >= CONFIG.letter.length){ clearInterval(t); $('#next').classList.remove('hidden'); }
+  }, 70);
+}
+$('#next').onclick = () => {
+  $('#letter').classList.add('hidden');
+  $('#story').classList.remove('hidden');
+  window.scrollTo(0, 0);
+};
+$('#heroBtn').onclick = () => $('.wrap').scrollIntoView();
+
+// العداد
+function tick(){
+  let diff = Math.max(0, Date.now() - new Date(CONFIG.startDate).getTime()) / 1000;
+  $('#d').textContent = Math.floor(diff / 86400);
+  $('#h').textContent = Math.floor(diff % 86400 / 3600);
+  $('#m').textContent = Math.floor(diff % 3600 / 60);
+  $('#s').textContent = Math.floor(diff % 60);
+}
+tick(); setInterval(tick, 1000);
+
+// الأغاني
+function loadSong(i){
+  song = (i + CONFIG.songs.length) % CONFIG.songs.length;
+  audio.src = CONFIG.songs[song].file;
+  $('#songName').textContent = CONFIG.songs[song].title;
+}
+$('#play').onclick = () => {
+  if (audio.paused){ audio.play(); $('#play').textContent = '⏸'; }
+  else { audio.pause(); $('#play').textContent = '▶'; }
+};
+$('#nextSong').onclick = () => { loadSong(song + 1); audio.play(); };
+$('#prev').onclick = () => { loadSong(song - 1); audio.play(); };
+audio.onended = () => { loadSong(song + 1); audio.play(); };
+audio.ontimeupdate = () => { $('#prog').style.width = (audio.currentTime / (audio.duration || 1) * 100) + '%'; };
+
+// زرار الرسالة والرجوع للبداية
+$('#msgBtn').onclick = () => $('#msgCard').classList.toggle('on');
+$('#again').onclick = () => location.reload();
+
+// قلوب بتنزل
+for (let i = 0; i < 16; i++){
+  const h = document.createElement('span');
+  h.className = 'heart'; h.textContent = '♥';
+  h.style.left = Math.random() * 100 + 'vw';
+  h.style.fontSize = (14 + Math.random() * 22) + 'px';
+  h.style.animationDuration = (8 + Math.random() * 10) + 's';
+  h.style.animationDelay = (-Math.random() * 14) + 's';
+  document.body.appendChild(h);
+}
+</script>
+</body>
+</html>
